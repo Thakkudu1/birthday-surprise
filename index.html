@@ -3,73 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#160b18">
-<title>For My Favourite Person 💗</title>
+<title>Happy Birthday Nichuu ❤️</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
-<div id="heartsLayer" aria-hidden="true"></div>
-<main class="wrap">
-  <section class="hero glass" id="hero">
-    <div class="orbit-heart">♡</div>
-    <p class="eyebrow">A little universe made just for you</p>
-    <h1>Happy Birthday,<br><span>My Favourite Person</span></h1>
-    <p class="subtitle">My best friend. My safe place. My life partner. 💗</p>
-    <div class="rose-line">🌹 ✨ 🤍 ✨ 🌹</div>
-    <button class="glow-button" id="open">Unlock your surprise <span>♡</span></button>
-    <p class="micro">Made with love, for someone irreplaceable.</p>
+
+<header>
+  <h2>Nichuu ❤️ Ashii</h2>
+</header>
+
+<main>
+  <section class="hero">
+    <p>✨ A SPECIAL SURPRISE FOR YOU ✨</p>
+    <h1>Happy Birthday,<br>Nichuu! 🎂</h1>
+    <h2>My Best Friend &amp; Life Partner 💖</h2>
+    <p>You are my happiness, my comfort, and my favourite person.</p>
+    <button onclick="showSurprise()">🎁 Open Your Surprise</button>
   </section>
 
-  <div id="content" class="hidden">
-    <section class="glass block reveal">
-      <span class="number">01 / A WISH</span><div class="emoji">🎂</div>
-      <h2>Make a wish, <em>my love</em></h2>
-      <p>Tap each candle and let your birthday wish fly into the universe.</p>
-      <div class="cake-scene">
-        <div class="candles"><button class="candle">🕯️</button><button class="candle">🕯️</button><button class="candle">🕯️</button></div>
-        <div class="cake">🎂</div>
-      </div>
-      <p id="wishText" class="pink-text">May your days be gentle, your dreams come true, and your heart always feel loved.</p>
-    </section>
+  <section id="surprise" class="hidden">
+    <h2>💌 A Letter From My Heart</h2>
+    <p>
+      Dear Nichuu,<br><br>
+      Happy Birthday to my best friend and life partner!
+      Thank you for the beautiful memories, the laughter,
+      and all the little moments that make life special.
+      I hope your birthday brings you endless happiness,
+      beautiful surprises, and countless reasons to smile.
+      You will always have a special place in my heart.
+      <br><br>
+      Forever your Best Friend &amp; Life Partner,<br>
+      Your Ashii ❤️
+    </p>
+  </section>
 
-    <section class="glass block reveal">
-      <span class="number">02 / FROM MY HEART</span><div class="emoji">💌</div>
-      <h2>A letter for <em>you</em></h2>
-      <article class="letter">
-        <p>My favourite person,</p>
-        <p>Happy Birthday to the person who is so much more than a best friend. You are my comfort on difficult days, my laughter in the little moments, my biggest cheerleader, and the person I want beside me through every chapter of life.</p>
-        <p>Thank you for knowing the real me, for making ordinary moments feel magical, and for being a home my heart can return to. I hope this year brings you the kindness, peace, adventure, and happiness you deserve.</p>
-        <p>Whatever life brings, I hope we keep choosing each other, keep laughing at our own silly jokes, and keep collecting memories that one day we'll look back on with the biggest smiles.</p>
-        <p class="sign">Today is all about you. Always remember how deeply you are loved. 🤍</p>
-      </article>
-      <button class="outline-button" id="heartButton">Send a sky full of hearts 💕</button>
-    </section>
+  <section>
+    <h2>📸 Our Memory Gallery</h2>
+    <p>Select photos from your phone to preview them here.</p>
+    <input type="file" accept="image/*" multiple onchange="addPhotos(event)">
+    <div id="gallery"></div>
+  </section>
 
-    <section class="glass block reveal">
-      <span class="number">03 / OUR LITTLE WORLD</span><div class="emoji">📸</div>
-      <h2>Memories worth <em>keeping</em></h2>
-      <p>Tap a frame to preview a favourite photo on this device.</p>
-      <div class="gallery">
-        <label class="frame"><input type="file" accept="image/*"><span>＋<small>Our first memory</small></span></label>
-        <label class="frame"><input type="file" accept="image/*"><span>＋<small>Our happy place</small></span></label>
-        <label class="frame"><input type="file" accept="image/*"><span>＋<small>Just us</small></span></label>
-      </div>
-      <p class="micro">For photos to appear for everyone, upload them to the website files too.</p>
-    </section>
+  <section>
+    <h2>🎂 Make a Birthday Wish</h2>
+    <button onclick="makeWish()">✨ Make a Wish ✨</button>
+    <p id="wish"></p>
+  </section>
 
-    <section class="glass block finale reveal">
-      <div class="infinity">∞</div><span class="number">04 / ALWAYS</span>
-      <h2>In every lifetime,<br><em>I'd find you.</em></h2>
-      <p>Not just for the birthdays, but for the quiet days, the big dreams, the unexpected adventures, and every little moment in between.</p>
-      <button class="glow-button" id="finalButton">Open one last surprise ✨</button>
-      <p id="finalText" class="final-text hidden">If I could give you one gift, it would be to let you see yourself through my eyes — then you'd understand how precious, loved, and extraordinary you are. Happy Birthday, my favourite person. ♡</p>
-      <button class="music-button" id="musicButton" onclick="playRomanticMusic()">🎵 Play Romantic Music ❤️</button>
-      <p class="micro">This button plays a gentle tone generated by the page; no external music file needed.</p>
-    </section>
-    <footer>Made with ♡, especially for you</footer>
-  </div>
+  <section>
+    <h2>💗 You Are My Forever Person</h2>
+    <p>Happy Birthday, Nichuu! With love, Ashii ❤️</p>
+  </section>
 </main>
-<script src="app.js"></script>
+
+<script>
+function showSurprise() {
+  document.getElementById('surprise').classList.remove('hidden');
+  document.getElementById('surprise').scrollIntoView({behavior:'smooth'});
+}
+
+function addPhotos(event) {
+  const gallery = document.getElementById('gallery');
+  for (const file of event.target.files) {
+    if (!file.type.startsWith('image/')) continue;
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    img.style.width = '140px';
+    img.style.height = '140px';
+    img.style.objectFit = 'cover';
+    img.style.borderRadius = '15px';
+    img.style.margin = '6px';
+    gallery.appendChild(img);
+  }
+}
+
+function makeWish() {
+  document.getElementById('wish').textContent =
+    'May all your beautiful wishes come true, Nichuu! 💖🎂✨';
+}
+</script>
+
 </body>
 </html>
