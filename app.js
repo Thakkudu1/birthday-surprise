@@ -71,3 +71,18 @@ function stopRomanticMusic() {
   const button = document.getElementById("musicButton");
   if (button) button.textContent = "🎵 Play Romantic Music ❤️";
 }
+// Unlock the birthday surprise
+document.addEventListener("DOMContentLoaded", function () {
+  const openButton = document.getElementById("open");
+  const content = document.getElementById("content");
+
+  if (openButton && content) {
+    openButton.addEventListener("click", function () {
+      content.classList.remove("hidden");
+      content.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+  }
+});
