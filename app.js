@@ -1,9 +1,73 @@
-const $=id=>document.getElementById(id);
-$('open').addEventListener('click',()=>{$('content').classList.remove('hidden');$('content').scrollIntoView({behavior:'smooth'});rain(30);});
-document.querySelectorAll('.candle').forEach(c=>c.addEventListener('click',()=>{if(c.dataset.out)return;c.dataset.out='1';c.textContent='✨';if(document.querySelectorAll('.candle:not([data-out])').length===0){$('wishText').textContent='Wish made! May this year bring you beautiful surprises and all the love you deserve. 💗';rain(38);}}));
-$('heartButton').addEventListener('click',()=>rain(65));
-$('finalButton').addEventListener('click',()=>{$('finalText').classList.remove('hidden');$('finalButton').textContent='Surprise unlocked 💗';rain(55);});
-function rain(n){const symbols=['💗','💕','💖','♡','✨','🌸'];for(let i=0;i<n;i++){const e=document.createElement('span');e.className='falling';e.textContent=symbols[Math.floor(Math.random()*symbols.length)];e.style.left=Math.random()*100+'vw';e.style.fontSize=(15+Math.random()*22)+'px';e.style.animationDuration=(3+Math.random()*4)+'s';e.style.animationDelay=Math.random()*.8+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),8500);}}
-document.querySelectorAll('.frame input').forEach(input=>input.addEventListener('change',e=>{const file=e.target.files&&e.target.files[0];if(!file)return;const frame=input.closest('.frame');let img=frame.querySelector('img');if(!img){img=document.createElement('img');frame.appendChild(img);}const r=new FileReader();r.onload=()=>img.src=r.result;r.readAsDataURL(file);}));
-let audioCtx=null,osc=null,gain=null;
-$('musicButton').addEventListener('click',()=>{try{if(audioCtx&&audioCtx.state==='running'){audioCtx.close();audioCtx=null;$('musicButton').textContent='♫ Play soft celebration sound';return;}audioCtx=new (window.AudioContext||window.webkitAudioContext)();osc=audioCtx.createOscillator();gain=audioCtx.createGain();osc.type='sine';osc.frequency.value=523.25;gain.gain.value=.035;osc.connect(gain);gain.connect(audioCtx.destination);osc.start();$('musicButton').textContent='♫ Stop celebration sound';}catch(e){$('musicButton').textContent='Sound is not supported on this browser';}});
+// Nichuu ❤️ Ashii — Romantic Music
+
+let audioCtx;
+let musicTimer;
+let musicPlaying = false;
+let noteIndex = 0;
+
+const melody = [
+  523.25, 659.25, 783.99, 659.25,
+  587.33, 698.46, 880.00, 698.46,
+  523.25, 659.25, 783.99, 1046.50,
+  880.00, 783.99, 659.25, 587.33
+];
+
+function playRomanticMusic() {
+  if (musicPlaying) {
+    stopRomanticMusic();
+    return;
+  }
+
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  audioCtx.resume();
+
+  musicPlaying = true;
+  noteIndex = 0;
+
+  const button = document.getElementById("musicButton");
+  if (button) button.textContent = "⏸ Stop Romantic Music";
+
+  function playNote() {
+    if (!musicPlaying || !audioCtx) return;
+
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.value = melody[noteIndex % melody.length];
+
+    gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+      0.12,
+      audioCtx.currentTime + 0.08
+    );
+    gain.gain.exponentialRampToValueAtTime(
+      0.0001,
+      audioCtx.currentTime + 0.65
+    );
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.7);
+
+    noteIndex++;
+  }
+
+  playNote();
+  musicTimer = setInterval(playNote, 500);
+}
+
+function stopRomanticMusic() {
+  musicPlaying = false;
+  clearInterval(musicTimer);
+
+  if (audioCtx) {
+    audioCtx.close();
+    audioCtx = null;
+  }
+
+  const button = document.getElementById("musicButton");
+  if (button) button.textContent = "🎵 Play Romantic Music ❤️";
+}
