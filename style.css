@@ -27,3 +27,58 @@ h2{font-size:clamp(1.9rem,5.5vw,3rem)}em{font-weight:500;color:var(--pink)}
 footer{text-align:center;color:#b998ad;font-size:.8rem;padding:10px}.falling{position:fixed;top:-30px;z-index:50;pointer-events:none;animation:fall linear forwards;text-shadow:0 0 12px #ff5fa5}
 @keyframes pulse{50%{transform:scale(1.13);text-shadow:0 0 40px #ff83ba}}@keyframes fade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
 @media(max-width:460px){.wrap{width:calc(100% - 16px);padding-top:12px}.glass{border-radius:23px;padding:23px 17px}.hero{min-height:75vh}.frame{height:100px}.letter{padding:15px}}
+/* Birthday Cake Surprise */
+.cake-scene {
+  animation: cakeFloat 3s ease-in-out infinite;
+}
+
+.cake {
+  animation: cakeGlow 2s ease-in-out infinite alternate;
+}
+
+.candle {
+  cursor: pointer;
+  transform-origin: bottom center;
+  animation: candleDance 1s ease-in-out infinite alternate;
+}
+
+@keyframes cakeFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes cakeGlow {
+  from {
+    filter: drop-shadow(0 0 3px #ffb6d9);
+  }
+  to {
+    filter: drop-shadow(0 0 16px #ff69b4);
+  }
+}
+
+@keyframes candleDance {
+  from {
+    transform: rotate(-4deg);
+  }
+  to {
+    transform: rotate(4deg);
+  }
+}
+
+/* Romantic Birthday Colors */
+.pink-text {
+  color: #ff69b4;
+}
+
+.glow-button {
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.glow-button:active {
+  transform: scale(0.95);
+}
