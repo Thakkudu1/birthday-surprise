@@ -1,1 +1,65 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fff0f6">
+<title>For My Favourite Person 💗</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="container">
+  <section class="hero panel">
+    <div class="small-heart">♡</div>
+    <p class="kicker">A little surprise, made with love</p>
+    <h1>Happy Birthday,<br><span>My Favourite Person</span> 💗</h1>
+    <p class="lead">To my best friend, my safe place, and my life partner.</p>
+    <div class="flowers">🌷 🤍 🌸 🤍 🌷</div>
+    <button class="button" id="start">Open your surprise ✨</button>
+    <p class="tiny">A tiny website for a very big love.</p>
+  </section>
+  <div id="surprises" class="hidden">
+    <section class="panel section">
+      <div class="emoji">🎂</div><h2>A birthday wish just for you</h2>
+      <p>Close your eyes, make a wish, then tap each candle.</p>
+      <div class="cake-area"><div class="candles">
+        <button class="candle" aria-label="Blow out candle">🕯️</button>
+        <button class="candle" aria-label="Blow out candle">🕯️</button>
+        <button class="candle" aria-label="Blow out candle">🕯️</button>
+      </div><div class="cake">🎂</div></div>
+      <p id="wish" class="highlight">May your year be full of peace, laughter, and dreams coming true. 💖</p>
+    </section>
+    <section class="panel section">
+      <div class="emoji">💌</div><h2>A letter from my heart</h2>
+      <div class="letter">
+        <p>My favourite person,</p>
+        <p>Happy Birthday to the one who is so much more than a best friend. You are my comfort, my laughter on hard days, my biggest cheerleader, and the person I want beside me through every chapter of life.</p>
+        <p>Thank you for understanding me, for sharing the silly moments, and for making even ordinary days feel special. I hope this new year gives you the same kindness, warmth, and happiness that you bring into my world.</p>
+        <p>Whatever adventures life brings, I hope we keep choosing each other, keep growing together, and keep collecting little memories that become our favourite stories.</p>
+        <p class="signoff">All my love, today and always. 🤍</p>
+      </div>
+      <button class="soft-button" id="hearts">Send a thousand hearts 💕</button>
+    </section>
+    <section class="panel section">
+      <div class="emoji">📸</div><h2>Our memory corner</h2>
+      <p>Choose up to three favourite photos to preview here.</p>
+      <div class="gallery">
+        <label class="photo"><input type="file" accept="image/*"><span>＋<small>Memory one</small></span></label>
+        <label class="photo"><input type="file" accept="image/*"><span>＋<small>Memory two</small></span></label>
+        <label class="photo"><input type="file" accept="image/*"><span>＋<small>Memory three</small></span></label>
+      </div>
+      <p class="tiny">Selected photos preview on this device only. To show photos to everyone, upload the image files with the website.</p>
+    </section>
+    <section class="panel section finale">
+      <div class="big-heart">💗</div><p class="kicker">One last thing…</p>
+      <h2>You are my <span>today</span>, my tomorrow,<br>and so many beautiful tomorrows.</h2>
+      <p>Happy Birthday to my best friend and life partner. I’m grateful for you in more ways than words can say.</p>
+      <button class="button" id="last">Reveal the last surprise 💝</button>
+      <p id="lastMessage" class="last-message hidden">If I could give you one gift, it would be to let you see yourself through my eyes — then you would understand how loved, valued, and extraordinary you are. Happy Birthday, my love. ♡</p>
+    </section>
+    <footer>Made with ♡, especially for you</footer>
+  </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
