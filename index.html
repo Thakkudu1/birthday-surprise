@@ -3,59 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#fff0f6">
+<meta name="theme-color" content="#160b18">
 <title>For My Favourite Person 💗</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="container">
-  <section class="hero panel">
-    <div class="small-heart">♡</div>
-    <p class="kicker">A little surprise, made with love</p>
-    <h1>Happy Birthday,<br><span>My Favourite Person</span> 💗</h1>
-    <p class="lead">To my best friend, my safe place, and my life partner.</p>
-    <div class="flowers">🌷 🤍 🌸 🤍 🌷</div>
-    <button class="button" id="start">Open your surprise ✨</button>
-    <p class="tiny">A tiny website for a very big love.</p>
+<div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+<div id="heartsLayer" aria-hidden="true"></div>
+<main class="wrap">
+  <section class="hero glass" id="hero">
+    <div class="orbit-heart">♡</div>
+    <p class="eyebrow">A little universe made just for you</p>
+    <h1>Happy Birthday,<br><span>My Favourite Person</span></h1>
+    <p class="subtitle">My best friend. My safe place. My life partner. 💗</p>
+    <div class="rose-line">🌹 ✨ 🤍 ✨ 🌹</div>
+    <button class="glow-button" id="open">Unlock your surprise <span>♡</span></button>
+    <p class="micro">Made with love, for someone irreplaceable.</p>
   </section>
-  <div id="surprises" class="hidden">
-    <section class="panel section">
-      <div class="emoji">🎂</div><h2>A birthday wish just for you</h2>
-      <p>Close your eyes, make a wish, then tap each candle.</p>
-      <div class="cake-area"><div class="candles">
-        <button class="candle" aria-label="Blow out candle">🕯️</button>
-        <button class="candle" aria-label="Blow out candle">🕯️</button>
-        <button class="candle" aria-label="Blow out candle">🕯️</button>
-      </div><div class="cake">🎂</div></div>
-      <p id="wish" class="highlight">May your year be full of peace, laughter, and dreams coming true. 💖</p>
+
+  <div id="content" class="hidden">
+    <section class="glass block reveal">
+      <span class="number">01 / A WISH</span><div class="emoji">🎂</div>
+      <h2>Make a wish, <em>my love</em></h2>
+      <p>Tap each candle and let your birthday wish fly into the universe.</p>
+      <div class="cake-scene">
+        <div class="candles"><button class="candle">🕯️</button><button class="candle">🕯️</button><button class="candle">🕯️</button></div>
+        <div class="cake">🎂</div>
+      </div>
+      <p id="wishText" class="pink-text">May your days be gentle, your dreams come true, and your heart always feel loved.</p>
     </section>
-    <section class="panel section">
-      <div class="emoji">💌</div><h2>A letter from my heart</h2>
-      <div class="letter">
+
+    <section class="glass block reveal">
+      <span class="number">02 / FROM MY HEART</span><div class="emoji">💌</div>
+      <h2>A letter for <em>you</em></h2>
+      <article class="letter">
         <p>My favourite person,</p>
-        <p>Happy Birthday to the one who is so much more than a best friend. You are my comfort, my laughter on hard days, my biggest cheerleader, and the person I want beside me through every chapter of life.</p>
-        <p>Thank you for understanding me, for sharing the silly moments, and for making even ordinary days feel special. I hope this new year gives you the same kindness, warmth, and happiness that you bring into my world.</p>
-        <p>Whatever adventures life brings, I hope we keep choosing each other, keep growing together, and keep collecting little memories that become our favourite stories.</p>
-        <p class="signoff">All my love, today and always. 🤍</p>
-      </div>
-      <button class="soft-button" id="hearts">Send a thousand hearts 💕</button>
+        <p>Happy Birthday to the person who is so much more than a best friend. You are my comfort on difficult days, my laughter in the little moments, my biggest cheerleader, and the person I want beside me through every chapter of life.</p>
+        <p>Thank you for knowing the real me, for making ordinary moments feel magical, and for being a home my heart can return to. I hope this year brings you the kindness, peace, adventure, and happiness you deserve.</p>
+        <p>Whatever life brings, I hope we keep choosing each other, keep laughing at our own silly jokes, and keep collecting memories that one day we'll look back on with the biggest smiles.</p>
+        <p class="sign">Today is all about you. Always remember how deeply you are loved. 🤍</p>
+      </article>
+      <button class="outline-button" id="heartButton">Send a sky full of hearts 💕</button>
     </section>
-    <section class="panel section">
-      <div class="emoji">📸</div><h2>Our memory corner</h2>
-      <p>Choose up to three favourite photos to preview here.</p>
+
+    <section class="glass block reveal">
+      <span class="number">03 / OUR LITTLE WORLD</span><div class="emoji">📸</div>
+      <h2>Memories worth <em>keeping</em></h2>
+      <p>Tap a frame to preview a favourite photo on this device.</p>
       <div class="gallery">
-        <label class="photo"><input type="file" accept="image/*"><span>＋<small>Memory one</small></span></label>
-        <label class="photo"><input type="file" accept="image/*"><span>＋<small>Memory two</small></span></label>
-        <label class="photo"><input type="file" accept="image/*"><span>＋<small>Memory three</small></span></label>
+        <label class="frame"><input type="file" accept="image/*"><span>＋<small>Our first memory</small></span></label>
+        <label class="frame"><input type="file" accept="image/*"><span>＋<small>Our happy place</small></span></label>
+        <label class="frame"><input type="file" accept="image/*"><span>＋<small>Just us</small></span></label>
       </div>
-      <p class="tiny">Selected photos preview on this device only. To show photos to everyone, upload the image files with the website.</p>
+      <p class="micro">For photos to appear for everyone, upload them to the website files too.</p>
     </section>
-    <section class="panel section finale">
-      <div class="big-heart">💗</div><p class="kicker">One last thing…</p>
-      <h2>You are my <span>today</span>, my tomorrow,<br>and so many beautiful tomorrows.</h2>
-      <p>Happy Birthday to my best friend and life partner. I’m grateful for you in more ways than words can say.</p>
-      <button class="button" id="last">Reveal the last surprise 💝</button>
-      <p id="lastMessage" class="last-message hidden">If I could give you one gift, it would be to let you see yourself through my eyes — then you would understand how loved, valued, and extraordinary you are. Happy Birthday, my love. ♡</p>
+
+    <section class="glass block finale reveal">
+      <div class="infinity">∞</div><span class="number">04 / ALWAYS</span>
+      <h2>In every lifetime,<br><em>I'd find you.</em></h2>
+      <p>Not just for the birthdays, but for the quiet days, the big dreams, the unexpected adventures, and every little moment in between.</p>
+      <button class="glow-button" id="finalButton">Open one last surprise ✨</button>
+      <p id="finalText" class="final-text hidden">If I could give you one gift, it would be to let you see yourself through my eyes — then you'd understand how precious, loved, and extraordinary you are. Happy Birthday, my favourite person. ♡</p>
+      <button class="music-button" id="musicButton">♫ Play soft celebration sound</button>
+      <p class="micro">This button plays a gentle tone generated by the page; no external music file needed.</p>
     </section>
     <footer>Made with ♡, especially for you</footer>
   </div>

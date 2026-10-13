@@ -1,42 +1,9 @@
-const $ = (id) => document.getElementById(id);
-$('start').addEventListener('click', () => {
-  $('surprises').classList.remove('hidden');
-  $('surprises').scrollIntoView({behavior:'smooth'});
-  hearts(24);
-});
-document.querySelectorAll('.candle').forEach(c => c.addEventListener('click', () => {
-  if (c.dataset.out) return;
-  c.dataset.out = '1'; c.textContent = '✨';
-  if (document.querySelectorAll('.candle:not([data-out])').length === 0) {
-    $('wish').textContent = 'Wish made! May your birthday be as wonderful as your heart. 💗';
-    hearts(32);
-  }
-}));
-$('hearts').addEventListener('click', () => hearts(55));
-$('last').addEventListener('click', () => {
-  $('lastMessage').classList.remove('hidden');
-  $('last').textContent = 'Surprise revealed 💗';
-  hearts(45);
-});
-function hearts(n) {
-  const symbols = ['💗','💕','💖','♡','🌸'];
-  for (let i=0;i<n;i++) {
-    const el = document.createElement('span');
-    el.className = 'falling-heart';
-    el.textContent = symbols[Math.floor(Math.random()*symbols.length)];
-    el.style.left = Math.random()*100+'vw';
-    el.style.fontSize = (16+Math.random()*20)+'px';
-    el.style.animationDuration = (3+Math.random()*4)+'s';
-    el.style.animationDelay = Math.random()*.7+'s';
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(),8000);
-  }
-}
-document.querySelectorAll('.photo input').forEach(input => input.addEventListener('change', e => {
-  const file = e.target.files && e.target.files[0]; if(!file) return;
-  const slot = input.closest('.photo'); let img = slot.querySelector('img');
-  if(!img){img=document.createElement('img');slot.appendChild(img);}
-  const reader = new FileReader();
-  reader.onload = () => {img.src=reader.result;};
-  reader.readAsDataURL(file);
-}));
+const $=id=>document.getElementById(id);
+$('open').addEventListener('click',()=>{$('content').classList.remove('hidden');$('content').scrollIntoView({behavior:'smooth'});rain(30);});
+document.querySelectorAll('.candle').forEach(c=>c.addEventListener('click',()=>{if(c.dataset.out)return;c.dataset.out='1';c.textContent='✨';if(document.querySelectorAll('.candle:not([data-out])').length===0){$('wishText').textContent='Wish made! May this year bring you beautiful surprises and all the love you deserve. 💗';rain(38);}}));
+$('heartButton').addEventListener('click',()=>rain(65));
+$('finalButton').addEventListener('click',()=>{$('finalText').classList.remove('hidden');$('finalButton').textContent='Surprise unlocked 💗';rain(55);});
+function rain(n){const symbols=['💗','💕','💖','♡','✨','🌸'];for(let i=0;i<n;i++){const e=document.createElement('span');e.className='falling';e.textContent=symbols[Math.floor(Math.random()*symbols.length)];e.style.left=Math.random()*100+'vw';e.style.fontSize=(15+Math.random()*22)+'px';e.style.animationDuration=(3+Math.random()*4)+'s';e.style.animationDelay=Math.random()*.8+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),8500);}}
+document.querySelectorAll('.frame input').forEach(input=>input.addEventListener('change',e=>{const file=e.target.files&&e.target.files[0];if(!file)return;const frame=input.closest('.frame');let img=frame.querySelector('img');if(!img){img=document.createElement('img');frame.appendChild(img);}const r=new FileReader();r.onload=()=>img.src=r.result;r.readAsDataURL(file);}));
+let audioCtx=null,osc=null,gain=null;
+$('musicButton').addEventListener('click',()=>{try{if(audioCtx&&audioCtx.state==='running'){audioCtx.close();audioCtx=null;$('musicButton').textContent='♫ Play soft celebration sound';return;}audioCtx=new (window.AudioContext||window.webkitAudioContext)();osc=audioCtx.createOscillator();gain=audioCtx.createGain();osc.type='sine';osc.frequency.value=523.25;gain.gain.value=.035;osc.connect(gain);gain.connect(audioCtx.destination);osc.start();$('musicButton').textContent='♫ Stop celebration sound';}catch(e){$('musicButton').textContent='Sound is not supported on this browser';}});
