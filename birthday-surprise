@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nichu's Birthday Museum 💗</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#fff0f7;color:#853c66;text-align:center}
+header{padding:18px;background:linear-gradient(135deg,#ffc4df,#fff)}
+h1{margin:8px;font-size:26px}
+p{line-height:1.5}
+#museum{position:relative;max-width:650px;margin:12px auto;background:linear-gradient(#ffe5f1,#fff8fc);border:4px solid #f5a9cf;border-radius:22px;overflow:hidden;min-height:390px;box-shadow:0 8px 25px #df91bd55}
+.wall{height:190px;padding:15px;background:linear-gradient(90deg,#ffd6e9,#fff4fa,#ffd6e9);border-bottom:9px solid #e9a1c5}
+.frames{display:flex;justify-content:space-evenly;gap:8px}
+.frame{width:28%;height:110px;border:5px solid white;border-radius:12px;background:#fbd2e6;box-shadow:0 3px 9px #c77da5;display:grid;place-items:center;font-size:30px}
+.floor{height:190px;background:repeating-linear-gradient(90deg,#f9c4df 0 48px,#ffe8f3 48px 96px);padding:15px}
+#player{font-size:40px;transition:transform .2s}
+#message{min-height:42px;padding:8px;font-weight:bold}
+.controls{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:12px}
+button{border:0;border-radius:25px;padding:13px 18px;background:#e879b0;color:white;font-weight:bold;font-size:15px;box-shadow:0 4px 8px #d98bb855}
+button:active{transform:scale(.95)}
+#puzzle{background:white;border-radius:18px;margin:12px auto;padding:16px;max-width:600px}
+#gift{font-size:55px;display:none}
+.heart{position:fixed;bottom:-30px;animation:float 6s linear infinite;pointer-events:none}
+@keyframes float{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+</style>
+</head>
+<body>
+<header>
+<h1>💗 Nichu's Birthday Museum 💗</h1>
+<p>A little world made just for you!</p>
+</header><div id="museum">
+  <div class="wall">
+    <h3>✨ Memory Gallery ✨</h3>
+    <div class="frames"><div class="frame">💗</div><div class="frame">🎀</div><div class="frame">🌸</div></div>
+  </div>
+  <div class="floor">
+    <p>Walk around and discover your surprise!</p>
+    <div id="player">🧍</div>
+    <div id="message">Welcome, Nichu! Tap a direction to explore 💕</div>
+  </div>
+</div><div class="controls">
+<button onclick="move(-1)">⬅️ Left</button>
+<button onclick="move(1)">Right ➡️</button>
+<button onclick="explore()">🔎 Explore</button>
+</div><div id="puzzle">
+<h2>🧩 Heart Puzzle</h2>
+<p>Which one means love?</p>
+<div class="controls">
+<button onclick="answer(false)">⭐ Star</button>
+<button onclick="answer(true)">💗 Heart</button>
+<button onclick="answer(false)">🌙 Moon</button>
+</div>
+<p id="result">Solve the puzzle to unlock your surprise!</p>
+<div id="gift">🎂🎁💐</div>
+</div><script>
+let position=0, solved=false;
+function move(direction){
+ position=Math.max(-2,Math.min(2,position+direction));
+ document.getElementById('player').style.transform=`translateX(${position*45}px)`;
+ document.getElementById('message').textContent='Keep exploring the museum, Nichu! 💕';
+}
+function explore(){
+ const messages=['A little memory filled with love 💗','You make every day brighter 🌸','One more step towards your surprise 🎁'];
+ document.getElementById('message').textContent=messages[Math.floor(Math.random()*messages.length)];
+}
+function answer(correct){
+ if(correct){
+  solved=true;
+  document.getElementById('result').textContent='Correct! You unlocked your birthday surprise! 💖';
+  document.getElementById('gift').style.display='block';
+ }else{
+  document.getElementById('result').textContent='Try again, Nichu! 💕';
+ }
+}
+setInterval(()=>{
+ const h=document.createElement('div');
+ h.className='heart';h.textContent=['💗','💕','💖'][Math.floor(Math.random()*3)];
+ h.style.left=Math.random()*100+'vw';h.style.fontSize=(16+Math.random()*20)+'px';
+ document.body.appendChild(h);setTimeout(()=>h.remove(),6000);
+},900);
+</script></body>
+</html>
