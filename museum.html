@@ -1,83 +1,271 @@
 <!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nichu's Birthday Museum 💗</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Nichu's 3D Birthday Adventure 💗</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#fff0f7;color:#853c66;text-align:center}
-header{padding:18px;background:linear-gradient(135deg,#ffc4df,#fff)}
-h1{margin:8px;font-size:26px}
-p{line-height:1.5}
-#museum{position:relative;max-width:650px;margin:12px auto;background:linear-gradient(#ffe5f1,#fff8fc);border:4px solid #f5a9cf;border-radius:22px;overflow:hidden;min-height:390px;box-shadow:0 8px 25px #df91bd55}
-.wall{height:190px;padding:15px;background:linear-gradient(90deg,#ffd6e9,#fff4fa,#ffd6e9);border-bottom:9px solid #e9a1c5}
-.frames{display:flex;justify-content:space-evenly;gap:8px}
-.frame{width:28%;height:110px;border:5px solid white;border-radius:12px;background:#fbd2e6;box-shadow:0 3px 9px #c77da5;display:grid;place-items:center;font-size:30px}
-.floor{height:190px;background:repeating-linear-gradient(90deg,#f9c4df 0 48px,#ffe8f3 48px 96px);padding:15px}
-#player{font-size:40px;transition:transform .2s}
-#message{min-height:42px;padding:8px;font-weight:bold}
-.controls{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:12px}
-button{border:0;border-radius:25px;padding:13px 18px;background:#e879b0;color:white;font-weight:bold;font-size:15px;box-shadow:0 4px 8px #d98bb855}
-button:active{transform:scale(.95)}
-#puzzle{background:white;border-radius:18px;margin:12px auto;padding:16px;max-width:600px}
-#gift{font-size:55px;display:none}
-.heart{position:fixed;bottom:-30px;animation:float 6s linear infinite;pointer-events:none}
-@keyframes float{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+body{margin:0;overflow:hidden;background:#fff0f7;font-family:Arial,sans-serif;color:#853b67}
+#game{position:fixed;inset:0}
+#hud{position:fixed;top:0;left:0;right:0;padding:12px;text-align:center;background:linear-gradient(#ffffffdd,transparent);pointer-events:none}
+#hud h1{font-size:21px;margin:3px}
+#status{font-size:13px;font-weight:bold;margin:5px}
+#controls{position:fixed;bottom:18px;left:0;right:0;display:flex;justify-content:space-between;align-items:end;padding:12px;pointer-events:none}
+.pad{display:grid;grid-template-columns:52px 52px 52px;grid-template-rows:48px 48px;gap:5px;pointer-events:auto}
+button{border:1px solid #e8a3c9;background:#fff0f8eF;color:#963e70;font-size:19px;font-weight:bold;border-radius:15px;box-shadow:0 3px 10px #a84e8040;touch-action:manipulation}
+.pad button:nth-child(1){grid-column:2;grid-row:1}
+.pad button:nth-child(2){grid-column:1;grid-row:2}
+.pad button:nth-child(3){grid-column:2;grid-row:2}
+.pad button:nth-child(4){grid-column:3;grid-row:2}
+#interact{pointer-events:auto;width:105px;height:52px;font-size:14px}
+#panel{position:fixed;inset:0;background:#fff0f7ed;display:none;align-items:center;justify-content:center;padding:22px}
+#card{max-width:390px;width:100%;background:white;border:3px solid #f0acd0;border-radius:24px;padding:22px;text-align:center;box-shadow:0 10px 35px #9d4b7a33}
+#card h2{margin-top:0}
+.choice{display:block;width:100%;padding:13px;margin:9px 0;font-size:16px}
+#cake{font-size:62px}
+#help{position:fixed;top:94px;left:10px;right:10px;text-align:center;font-size:12px;color:#86436b;pointer-events:none}
 </style>
 </head>
 <body>
-<header>
-<h1>💗 Nichu's Birthday Museum 💗</h1>
-<p>A little world made just for you!</p>
-</header><div id="museum">
-  <div class="wall">
-    <h3>✨ Memory Gallery ✨</h3>
-    <div class="frames"><div class="frame">💗</div><div class="frame">🎀</div><div class="frame">🌸</div></div>
-  </div>
-  <div class="floor">
-    <p>Walk around and discover your surprise!</p>
-    <div id="player">🧍</div>
-    <div id="message">Welcome, Nichu! Tap a direction to explore 💕</div>
-  </div>
-</div><div class="controls">
-<button onclick="move(-1)">⬅️ Left</button>
-<button onclick="move(1)">Right ➡️</button>
-<button onclick="explore()">🔎 Explore</button>
-</div><div id="puzzle">
-<h2>🧩 Heart Puzzle</h2>
-<p>Which one means love?</p>
-<div class="controls">
-<button onclick="answer(false)">⭐ Star</button>
-<button onclick="answer(true)">💗 Heart</button>
-<button onclick="answer(false)">🌙 Moon</button>
+<div id="game"></div>
+<div id="hud">
+<h1>💗 Nichu's Birthday Adventure 💗</h1>
+<div id="status">Room 1 of 4 · Find the heart key!</div>
 </div>
-<p id="result">Solve the puzzle to unlock your surprise!</p>
-<div id="gift">🎂🎁💐</div>
-</div><script>
-let position=0, solved=false;
-function move(direction){
- position=Math.max(-2,Math.min(2,position+direction));
- document.getElementById('player').style.transform=`translateX(${position*45}px)`;
- document.getElementById('message').textContent='Keep exploring the museum, Nichu! 💕';
+<div id="help">Use the arrows to walk. Approach a glowing door and tap Explore.</div>
+<div id="controls">
+<div class="pad">
+<button data-move="forward">⬆️</button>
+<button data-move="left">⬅️</button>
+<button data-move="back">⬇️</button>
+<button data-move="right">➡️</button>
+</div>
+<button id="interact">✨ Explore</button>
+</div>
+<div id="panel">
+<div id="card">
+<h2 id="question">💗 Heart Puzzle</h2>
+<p id="description">Choose the correct answer to unlock the next room.</p>
+<div id="answers"></div>
+<button id="close" class="choice" style="display:none">Continue 💖</button>
+</div>
+</div><script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script><script>
+(()=>{
+const game=document.getElementById('game');
+const status=document.getElementById('status');
+const panel=document.getElementById('panel');
+const question=document.getElementById('question');
+const description=document.getElementById('description');
+const answers=document.getElementById('answers');
+const closeBtn=document.getElementById('close');
+
+if(!window.THREE){
+ status.textContent='3D library did not load. Check your internet and reload.';
+ return;
 }
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color('#ffeaf5');
+scene.fog=new THREE.Fog('#ffeaf5',15,34);
+
+const camera=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,.1,100);
+camera.position.set(0,1.65,7);
+
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+game.appendChild(renderer.domElement);
+
+scene.add(new THREE.HemisphereLight(0xffffff,0xe59dc6,2));
+const light=new THREE.DirectionalLight(0xffffff,2.4);
+light.position.set(-4,9,6);
+light.castShadow=true;
+scene.add(light);
+
+const pink=new THREE.MeshStandardMaterial({color:'#ffc4e0',roughness:.75});
+const white=new THREE.MeshStandardMaterial({color:'#fff8fc',roughness:.8});
+const gold=new THREE.MeshStandardMaterial({color:'#f5c96d',metalness:.35,roughness:.35});
+const rose=new THREE.MeshStandardMaterial({color:'#ed77b6',emissive:'#8e275f',emissiveIntensity:.25});
+const purple=new THREE.MeshStandardMaterial({color:'#bd91e8',emissive:'#5a267f',emissiveIntensity:.25});
+
+function box(w,h,d,mat,x,y,z){
+ const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);
+ m.position.set(x,y,z);
+ m.castShadow=true;m.receiveShadow=true;
+ scene.add(m);return m;
+}
+
+function sphere(r,mat,x,y,z){
+ const m=new THREE.Mesh(new THREE.SphereGeometry(r,20,14),mat);
+ m.position.set(x,y,z);m.castShadow=true;scene.add(m);return m;
+}
+
+function textSprite(label){
+ const c=document.createElement('canvas');
+ c.width=512;c.height=128;
+ const ctx=c.getContext('2d');
+ ctx.fillStyle='#fff8fc';ctx.fillRect(0,0,512,128);
+ ctx.strokeStyle='#ec91bf';ctx.lineWidth=8;ctx.strokeRect(4,4,504,120);
+ ctx.fillStyle='#8e3768';ctx.font='bold 34px Arial';ctx.textAlign='center';
+ ctx.fillText(label,256,76);
+ const tex=new THREE.CanvasTexture(c);
+ const m=new THREE.Mesh(new THREE.PlaneGeometry(4,1),new THREE.MeshBasicMaterial({map:tex,transparent:true}));
+ return m;
+}
+
+let room=0,unlocked=false,nearDoor=false;
+const door=box(2.2,3,.22,rose,0,1.5,-9.72);
+const doorLabel=textSprite('LOVE ROOM');
+doorLabel.position.set(0,3.55,-9.58);scene.add(doorLabel);
+
+function decorateRoom(){
+ box(20,.3,24,pink,0,-.2,-1);
+ box(20,.25,24,white,0,4.2,-1);
+ box(.25,4.4,24,white,-10,2,-1);
+ box(.25,4.4,24,white,10,2,-1);
+ box(20,4.4,.25,pink,0,2,-13);
+ box(20,4.4,.25,pink,0,2,11);
+ for(let x=-8;x<=8;x+=4){
+   box(.08,3,.15,gold,x,2,-12.8);
+   sphere(.16,gold,x,3.7,-12.65);
+ }
+ for(let x=-7;x<=7;x+=3.5){
+   const frame=box(1.5,1.8,.15,white,x,2.5,-12.78);
+   box(1.15,1.4,.08,rose,x,2.5,-12.66);
+   sphere(.22,white,x,2.55,-12.55);
+ }
+ // decorative columns
+ for(let x of [-8.5,8.5]){
+  for(let z of [-9,-3,3,8]){
+   box(.5,3,.5,white,x,1.5,z);
+   box(.8,.2,.8,gold,x,3.1,z);
+   box(.8,.2,.8,gold,x,.15,z);
+  }
+ }
+ // glowing floating hearts
+ for(let i=0;i<18;i++){
+  const h=sphere(.16,i%2?rose:purple,(Math.random()-.5)*15,1+Math.random()*2.5,-10+Math.random()*19);
+  h.userData.float=Math.random()*6;
+ }
+ // cake display
+ box(2.5,.3,2,white,5,.25,-5);
+ const cake=sphere(.72,white,5,1,-5);cake.scale.y=.6;
+ sphere(.48,rose,5,1.55,-5);
+ for(let i=0;i<5;i++){
+  const a=i*Math.PI*2/5;
+  box(.07,.45,.07,gold,5+Math.cos(a)*.3,2,-5+Math.sin(a)*.3);
+ }
+ const sign=textSprite('HAPPY BIRTHDAY');
+ sign.position.set(5,3,-5);scene.add(sign);
+}
+decorateRoom();
+
+const player={x:0,z:7,yaw:0};
+const held={};
+let lastTime=0;
+function setMove(key,on){held[key]=on}
+document.querySelectorAll('[data-move]').forEach(btn=>{
+ const key=btn.dataset.move;
+ btn.addEventListener('pointerdown',e=>{e.preventDefault();setMove(key,true)});
+ ['pointerup','pointercancel','pointerleave'].forEach(ev=>btn.addEventListener(ev,()=>setMove(key,false)));
+});
+
+function updateStatus(){
+ status.textContent=`Room ${room+1} of 4 · ${['Find the heart key!','Solve the memory puzzle!','Unlock the final door!','Birthday surprise unlocked!'][room]}`;
+}
+
+function showPuzzle(title,desc,options,onAnswer){
+ question.textContent=title;description.textContent=desc;
+ answers.innerHTML='';closeBtn.style.display='none';
+ options.forEach(o=>{
+  const b=document.createElement('button');b.className='choice';b.textContent=o.label;
+  b.onclick=()=>{
+   if(o.correct){
+    description.textContent=o.success||'Correct! The door is glowing brighter! 💗';
+    answers.innerHTML='';
+    closeBtn.style.display='block';
+    closeBtn.onclick=()=>{panel.style.display='none';onAnswer()};
+   }else{
+    description.textContent='Not quite! Try another answer, Nichu. 💕';
+   }
+  };
+  answers.appendChild(b);
+ });
+ panel.style.display='flex';
+}
+
 function explore(){
- const messages=['A little memory filled with love 💗','You make every day brighter 🌸','One more step towards your surprise 🎁'];
- document.getElementById('message').textContent=messages[Math.floor(Math.random()*messages.length)];
-}
-function answer(correct){
- if(correct){
-  solved=true;
-  document.getElementById('result').textContent='Correct! You unlocked your birthday surprise! 💖';
-  document.getElementById('gift').style.display='block';
+ if(panel.style.display==='flex')return;
+ const distance=Math.hypot(player.x,player.z+9.5);
+ if(distance<4){
+  if(room===0){
+   showPuzzle('🧩 Level 1: Heart Key','Which symbol means love?',[
+    {label:'⭐ Star',correct:false},
+    {label:'💗 Heart',correct:true,success:'You found the heart key! The next room is opening.'},
+    {label:'🌙 Moon',correct:false}
+   ],()=>{room=1;unlocked=true;door.material=gold;updateStatus()});
+  }else if(room===1){
+   showPuzzle('🧩 Level 2: Memory','What makes a birthday memorable?',[
+    {label:'Kindness and memories',correct:true,success:'Wonderful! The memory room is unlocked.'},
+    {label:'Only presents',correct:false},
+    {label:'Nothing at all',correct:false}
+   ],()=>{room=2;door.material=purple;updateStatus()});
+  }else if(room===2){
+   showPuzzle('🧩 Level 3: Final Door','Choose your final surprise!',[
+    {label:'🎂 Birthday Cake',correct:true,success:'All puzzles solved! Happy Birthday, Nichu!'},
+    {label:'Close the museum',correct:false}
+   ],()=>{room=3;unlocked=true;door.material=rose;updateStatus();showFinal()});
+  }else{
+   showFinal();
+  }
  }else{
-  document.getElementById('result').textContent='Try again, Nichu! 💕';
+  showPuzzle('💗 A Little Reminder','Walk closer to the glowing door at the back of the museum.',[
+   {label:'Got it! 💕',correct:true,success:'Use the arrow buttons to walk towards the back door.'}
+  ],()=>{});
  }
 }
-setInterval(()=>{
- const h=document.createElement('div');
- h.className='heart';h.textContent=['💗','💕','💖'][Math.floor(Math.random()*3)];
- h.style.left=Math.random()*100+'vw';h.style.fontSize=(16+Math.random()*20)+'px';
- document.body.appendChild(h);setTimeout(()=>h.remove(),6000);
-},900);
+
+function showFinal(){
+ question.textContent='🎂 Happy Birthday, Nichu! 💗';
+ description.innerHTML='<div id="cake">🎂🎁💐</div><b>To my best friend and life partner</b><br><br>May your life be filled with love, laughter, beautiful memories and endless happiness. Thank you for being you. — Ashii ❤️';
+ answers.innerHTML='';
+ closeBtn.textContent='Back to Museum 💕';
+ closeBtn.style.display='block';
+ closeBtn.onclick=()=>{panel.style.display='none'};
+ panel.style.display='flex';
+}
+
+document.getElementById('interact').addEventListener('click',explore);
+
+function animate(time){
+ requestAnimationFrame(animate);
+ const dt=Math.min((time-lastTime)/1000||0,.05);lastTime=time;
+ const speed=3.2*dt;
+ if(held.forward)player.z-=speed;
+ if(held.back)player.z+=speed;
+ if(held.left)player.x-=speed;
+ if(held.right)player.x+=speed;
+ player.x=THREE.MathUtils.clamp(player.x,-8.8,8.8);
+ player.z=THREE.MathUtils.clamp(player.z,-10.5,9.5);
+ camera.position.set(player.x,1.65,player.z);
+ camera.lookAt(player.x,1.5,player.z-5);
+ scene.children.forEach(o=>{
+  if(o.userData.float!==undefined){
+   o.position.y+=Math.sin(time*.001+o.userData.float)*.0015;
+  }
+ });
+ renderer.render(scene,camera);
+}
+requestAnimationFrame(animate);
+
+addEventListener('resize',()=>{
+ camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+ renderer.setSize(innerWidth,innerHeight);
+});
+updateStatus();
+})();
 </script></body>
 </html>
