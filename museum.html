@@ -267,5 +267,84 @@ addEventListener('resize',()=>{
 });
 updateStatus();
 })();
-</script></body>
+</script>
+<!-- MUSIC & PHOTO SETTINGS -->
+<button id="settingsOpen" style="position:fixed;top:145px;right:12px;z-index:20;padding:12px;border:0;border-radius:15px;background:#fff0f8;color:#963e70;font-weight:bold">
+⚙️ Settings
+</button>
+
+<div id="settingsPanel" style="display:none;position:fixed;inset:0;z-index:30;background:#fff0f7f5;overflow:auto;padding:20px;color:#853b67;font-family:Arial,sans-serif">
+  <div style="max-width:440px;margin:30px auto;background:white;padding:22px;border-radius:22px;border:2px solid #f0acd0">
+    <h2>💗 Nichu's Settings</h2><h3>🎵 Choose Music</h3>
+<input id="musicFile" type="file" accept="audio/*" style="width:100%">
+<audio id="musicPlayer" controls style="width:100%;margin-top:12px"></audio>
+
+<h3>📸 Choose Photos</h3>
+<input id="photoFiles" type="file" accept="image/*" multiple style="width:100%">
+<div id="photoPreview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"></div>
+
+<h3>💌 Birthday Message</h3>
+<textarea id="birthdayText" rows="3" style="width:100%;padding:10px;border:1px solid pink;border-radius:10px">Happy Birthday, Nichu! 💗 You make life beautiful. — Ashii ❤️</textarea>
+
+<button id="saveSettings" style="padding:12px;border:0;border-radius:12px;background:#e879b0;color:white;margin-top:12px">💾 Save Message</button>
+<button id="settingsClose" style="padding:12px;border:0;border-radius:12px;background:#fce1ef;color:#853b67;margin-top:12px">Close ✖️</button>
+<p id="settingsStatus"></p>
+
+  </div>
+</div>
+
+<script>
+(() => {
+  const open = document.getElementById('settingsOpen');
+  const panel = document.getElementById('settingsPanel');
+  const close = document.getElementById('settingsClose');
+  const musicFile = document.getElementById('musicFile');
+  const player = document.getElementById('musicPlayer');
+  const photoFiles = document.getElementById('photoFiles');
+  const preview = document.getElementById('photoPreview');
+  const message = document.getElementById('birthdayText');
+  const status = document.getElementById('settingsStatus');
+
+  open.addEventListener('click', () => panel.style.display = 'block');
+  close.addEventListener('click', () => panel.style.display = 'none');
+
+  musicFile.addEventListener('change', () => {
+    const file = musicFile.files[0];
+    if (!file) return;
+    if (player.dataset.url) URL.revokeObjectURL(player.dataset.url);
+    const url = URL.createObjectURL(file);
+    player.dataset.url = url;
+    player.src = url;
+    player.play().catch(() => {
+      status.textContent = 'Press Play on the music player to start the song.';
+    });
+  });
+
+  photoFiles.addEventListener('change', () => {
+    preview.replaceChildren();
+    Array.from(photoFiles.files).forEach(file => {
+      if (!file.type.startsWith('image/')) return;
+      const img = document.createElement('img');
+      img.alt = 'Selected memory photo';
+      img.src = URL.createObjectURL(file);
+      img.style.cssText = 'width:95px;height:95px;object-fit:cover;border-radius:12px;border:2px solid pink';
+      preview.appendChild(img);
+    });
+    status.textContent = 'Selected photos are previewed here. They are not uploaded to GitHub.';
+  });
+
+  try {
+    message.value = localStorage.getItem('nichuBirthdayMessage') || message.value;
+  } catch (e) {}
+
+  document.getElementById('saveSettings').addEventListener('click', () => {
+    try {
+      localStorage.setItem('nichuBirthdayMessage', message.value);
+      status.textContent = 'Birthday message saved on this browser! 💗';
+    } catch (e) {
+      status.textContent = 'Message could not be saved in this browser.';
+    }
+  });
+})();
+</script></body> 
 </html>
