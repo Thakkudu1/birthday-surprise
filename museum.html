@@ -2,7 +2,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Nichooz's 3D Birthday Adventure 💗</title>
+<title>Mayavi's 3D Birthday Adventure 💗</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;overflow:hidden;background:#fff0f7;font-family:Arial,sans-serif;color:#853b67}
@@ -29,7 +29,7 @@ button{border:1px solid #e8a3c9;background:#fff0f8eF;color:#963e70;font-size:19p
 <body>
 <div id="game"></div>
 <div id="hud">
-<h1>💗 Nichooz's Birthday Adventure 💗</h1>
+<h1>💗 Mayavi's Birthday Adventure 💗</h1>
 <div id="status">Room 1 of 4 · Find the heart key!</div>
 </div>
 <div id="help">Use the arrows to walk. Approach a glowing door and tap Explore.</div>
@@ -118,7 +118,7 @@ function textSprite(label){
 
 let room=0,unlocked=false,nearDoor=false;
 const door=box(2.2,3,.22,rose,0,1.5,-9.72);
-const doorLabel=textSprite('LOVE ROOM');
+const doorLabel=textSprite('MEMORY ROOM');
 doorLabel.position.set(0,3.55,-9.58);scene.add(doorLabel);
 
 function decorateRoom(){
@@ -189,7 +189,7 @@ function showPuzzle(title,desc,options,onAnswer){
     closeBtn.style.display='block';
     closeBtn.onclick=()=>{panel.style.display='none';onAnswer()};
    }else{
-    description.textContent='Not quite! Try another answer, Nichooz. 💕';
+    description.textContent='Not quite! Try another answer, Mayavi. 💕';
    }
   };
   answers.appendChild(b);
@@ -215,7 +215,7 @@ function explore(){
    ],()=>{room=2;door.material=purple;updateStatus()});
   }else if(room===2){
    showPuzzle('🧩 Level 3: Final Door','Choose your final surprise!',[
-    {label:'🎂 Birthday Cake',correct:true,success:'All puzzles solved! Happy Birthday, Nichooz!'},
+    {label:'🎂 Birthday Cake',correct:true,success:'All puzzles solved! Happy Birthday, Mayavi!'},
     {label:'Close the birthday celebration',correct:false}
    ],()=>{room=3;unlocked=true;door.material=rose;updateStatus();showFinal()});
   }else{
@@ -229,7 +229,7 @@ function explore(){
 }
 
 function showFinal(){
- question.textContent='🎂 Happy Birthday, Nichooz! 💗';
+ question.textContent='🎂 Happy Birthday, Mayavi! 💗';
  description.innerHTML='<div id="cake">🎂🎁💐</div><b>To my best friend and life partner</b><br><br>May your life be filled with love, laughter, beautiful memories and endless happiness. Thank you for being you. — Ashii ❤️';
  answers.innerHTML='';
  closeBtn.textContent='Back to birthday celebration 💕';
@@ -276,7 +276,7 @@ style="position:fixed;top:145px;right:12px;z-index:9999;padding:12px;background:
 
 <div id="settingsPanel" style="display:none;position:fixed;inset:0;z-index:30;background:#fff0f7f5;overflow:auto;padding:20px;color:#853b67;font-family:Arial,sans-serif">
   <div style="max-width:440px;margin:30px auto;background:white;padding:22px;border-radius:22px;border:2px solid #f0acd0">
-    <h2>💗 Nichooz's Settings</h2><h3>🎵 Choose Music</h3>
+    <h2>💗 Mayavi's Settings</h2><h3>🎵 Choose Music</h3>
 <input id="musicFile" type="file" accept="audio/*" style="width:100%">
 <audio id="musicPlayer" controls style="width:100%;margin-top:12px"></audio>
 
@@ -285,7 +285,7 @@ style="position:fixed;top:145px;right:12px;z-index:9999;padding:12px;background:
 <div id="photoPreview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"></div>
 
 <h3>💌 Birthday Message</h3>
-<textarea id="birthdayText" rows="3" style="width:100%;padding:10px;border:1px solid pink;border-radius:10px">Happy Birthday, Nichooz! 💗 You make life beautiful. — Ashii ❤️</textarea>
+<textarea id="birthdayText" rows="3" style="width:100%;padding:10px;border:1px solid pink;border-radius:10px">Happy Birthday, Mayavi! Wishing you a year full of happiness and great memories. — Your friend</textarea>
 
 <button id="saveSettings" style="padding:12px;border:0;border-radius:12px;background:#e879b0;color:white;margin-top:12px">💾 Save Message</button>
 <button id="settingsClose" style="padding:12px;border:0;border-radius:12px;background:#fce1ef;color:#853b67;margin-top:12px">Close ✖️</button>
@@ -335,12 +335,12 @@ style="position:fixed;top:145px;right:12px;z-index:9999;padding:12px;background:
   });
 
   try {
-    message.value = localStorage.getItem('nichuBirthdayMessage') || message.value;
+    message.value = localStorage.getItem('mayaviBirthdayMessage') || message.value;
   } catch (e) {}
 
   document.getElementById('saveSettings').addEventListener('click', () => {
     try {
-      localStorage.setItem('nichuBirthdayMessage', message.value);
+      localStorage.setItem('mayaviBirthdayMessage', message.value);
       status.textContent = 'Birthday message saved on this browser! 💗';
     } catch (e) {
       status.textContent = 'Message could not be saved in this browser.';
@@ -348,7 +348,7 @@ style="position:fixed;top:145px;right:12px;z-index:9999;padding:12px;background:
   });
 })();
  <div style="background:linear-gradient(135deg,#fff0f6,#fffaf0);padding:22px 12px;margin:20px auto;border-radius:20px;text-align:center;">
-<h2 style="color:#c44d7c;">🌸 Nichooz's Memory birthday celebration 🌸</h2>
+<h2 style="color:#c44d7c;">🌸 Mayavi's Memory birthday celebration 🌸</h2>
 <p style="color:#765064;">Every picture tells a beautiful story ❤️</p>
 <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;">
 <img src="https://raw.githubusercontent.com/Thakkudu1/birthday-surprise/main/file_0000000006ec81f5812e08b4af99d10b.png" alt="Beautiful Memory 1" style="width:100%;height:200px;object-fit:cover;border-radius:14px;border:3px solid white;box-shadow:0 4px 12px #d9a0b8;"><img src="https://raw.githubusercontent.com/Thakkudu1/birthday-surprise/main/file_0000000013fc82068e34288996793500.png" alt="Beautiful Memory 2" style="width:100%;height:200px;object-fit:cover;border-radius:14px;border:3px solid white;box-shadow:0 4px 12px #d9a0b8;"><img src="https://raw.githubusercontent.com/Thakkudu1/birthday-surprise/main/file_000000001e4881f7ae712138e3dbbeca.png" alt="Beautiful Memory 3" style="width:100%;height:200px;object-fit:cover;border-radius:14px;border:3px solid white;box-shadow:0 4px 12px #d9a0b8;"><img src="https://raw.githubusercontent.com/Thakkudu1/birthday-surprise/main/file_00000000278881f59557be25e779086f.png" alt="Beautiful Memory 4" style="width:100%;height:200px;object-fit:cover;border-radius:14px;border:3px solid white;box-shadow:0 4px 12px #d9a0b8;">
