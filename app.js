@@ -1,4 +1,4 @@
-// Nichuu ❤️ Ashii — Romantic Music
+// Mayavi Birthday Music
 
 let audioCtx;
 let musicTimer;
@@ -25,7 +25,7 @@ function playRomanticMusic() {
   noteIndex = 0;
 
   const button = document.getElementById("musicButton");
-  if (button) button.textContent = "⏸ Stop Romantic Music";
+  if (button) button.textContent = "⏸ Stop Birthday Music";
 
   function playNote() {
     if (!musicPlaying || !audioCtx) return;
@@ -69,7 +69,7 @@ function stopRomanticMusic() {
   }
 
   const button = document.getElementById("musicButton");
-  if (button) button.textContent = "🎵 Play Romantic Music ❤️";
+  if (button) button.textContent = "🎵 Play Birthday Music";
 }
 // Unlock the birthday surprise
 document.addEventListener("DOMContentLoaded", function () {
